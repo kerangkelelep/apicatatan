@@ -1,15 +1,13 @@
 exports.handler = async (event) => {
     
-    // Panggil node-fetch menggunakan 'import'
+    // Perbaikan untuk 'require()'
     const fetch = (await import('node-fetch')).default;
 
     const { prompt } = JSON.parse(event.body);
     const API_KEY = process.env.GEMINI_API_KEY;
 
-    // --- PERBAIKAN URL ADA DI SINI ---
-    // 'generativelace' diubah menjadi 'generativelanguage'
+    // Perbaikan typo 'generativelanguage'
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
-    // --- AKHIR PERBAIKAN ---
 
     const dataRequest = {
         "contents": [
