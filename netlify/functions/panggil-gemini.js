@@ -1,13 +1,14 @@
 exports.handler = async (event) => {
     
-    // Perbaikan untuk 'require()'
     const fetch = (await import('node-fetch')).default;
 
     const { prompt } = JSON.parse(event.body);
     const API_KEY = process.env.GEMINI_API_KEY;
 
-    // Perbaikan typo 'generativelanguage'
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
+    // --- PERBAIKAN NAMA MODEL ADA DI SINI ---
+    // 'gemini-pro' diubah menjadi 'gemini-1.5-flash'
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+    // --- AKHIR PERBAIKAN ---
 
     const dataRequest = {
         "contents": [
