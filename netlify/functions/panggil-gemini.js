@@ -3,12 +3,11 @@ exports.handler = async (event) => {
     const fetch = (await import('node-fetch')).default;
 
     const { prompt } = JSON.parse(event.body);
-    const API_KEY = process.env.GEMINI_API_KEY;
+    const API_KEY = process.env.GEMINI_API_KEY; // Kunci dari Netlify
 
-    // --- PERBAIKAN NAMA MODEL ADA DI SINI ---
-    // 'gemini-pro' diubah menjadi 'gemini-1.5-flash'
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-    // --- AKHIR PERBAIKAN ---
+    // --- PERBAIKAN 1: Gunakan model 'gemini-2.0-flash' ---
+    //    dan hapus ?key= dari akhir URL
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`;
 
     const dataRequest = {
         "contents": [
@@ -19,7 +18,12 @@ exports.handler = async (event) => {
     try {
         const response = await fetch(url, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            // --- PERBAIKAN 2: Kirim API Key sebagai 'X-goog-api-key' di Header ---
+            headers: { 
+                "Content-Type": "application/json",
+                "X-goog-api-key": API_KEY 
+            },
+            // --- AKHIR PERBAIKAN ---
             body: JSON.stringify(dataRequest)
         });
 
