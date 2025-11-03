@@ -10,7 +10,7 @@ exports.handler = async (event) => {
     // 2. Ambil API Key RAHASIA Anda dari Netlify (BUKAN DARI KODE)
     // Kita akan atur 'GEMINI_API_KEY' ini di dashboard Netlify nanti
     const API_KEY = process.env.GEMINI_API_KEY;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${AIzaSyAJvj2grWKgI08gntbMgr4LQ9UBM4epN78}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
 
     const dataRequest = {
         "contents": [
@@ -45,4 +45,5 @@ exports.handler = async (event) => {
             body: JSON.stringify({ error: error.message })
         };
     }
+
 };
