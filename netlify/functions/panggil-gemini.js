@@ -8,7 +8,7 @@ exports.handler = async (event) => {
 
     // --- PERBAIKAN URL ADA DI SINI ---
     // 'generativelace' diubah menjadi 'generativelanguage'
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
     // --- AKHIR PERBAIKAN ---
 
     const dataRequest = {
