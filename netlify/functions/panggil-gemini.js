@@ -1,16 +1,20 @@
-// Isi file: netlify/functions/panggil-gemini.js
-
-// Ini adalah backend (server) Node.js, jadi kita pakai 'require'
-const fetch = require('node-fetch');
+// HAPUS 'require' dari atas sini
 
 exports.handler = async (event) => {
+    
+    // --- PERBAIKANNYA ADA DI SINI ---
+    // Kita panggil node-fetch menggunakan cara 'import' baru
+    // di dalam fungsi handler.
+    const fetch = (await import('node-fetch')).default;
+    // --- AKHIR PERBAIKAN ---
+
+
     // 1. Ambil "prompt" yang dikirim oleh browser (dari script.js)
     const { prompt } = JSON.parse(event.body);
 
     // 2. Ambil API Key RAHASIA Anda dari Netlify (BUKAN DARI KODE)
-    // Kita akan atur 'GEMINI_API_KEY' ini di dashboard Netlify nanti
     const API_KEY = process.env.GEMINI_API_KEY;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
+    const url = `https://generativelace.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
 
     const dataRequest = {
         "contents": [
@@ -27,6 +31,9 @@ exports.handler = async (event) => {
         });
 
         if (!response.ok) {
+            // Kita tambahkan logging di sini agar lebih jelas
+            const errorBody = await response.text();
+            console.error(`Google API Error: ${response.status}`, errorBody);
             throw new Error(`API request failed with status ${response.status}`);
         }
 
@@ -45,5 +52,4 @@ exports.handler = async (event) => {
             body: JSON.stringify({ error: error.message })
         };
     }
-
 };
