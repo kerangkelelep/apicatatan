@@ -1,0 +1,236 @@
+/* =================================
+   1. DEFINISI VARIABEL (Modern)
+   ================================= */
+:root {
+  /* Font & Ukuran */
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* Palet Warna */
+  --c-bg: #f8f9fa;             /* Background Halaman (Abu-abu sangat muda) */
+  --c-surface: #ffffff;        /* Background Kartu/Container (Putih) */
+  --c-border: #e5e7eb;         /* Warna Border (Abu-abu muda) */
+  
+  --c-text-primary: #1f2937;   /* Teks Utama (Hitam-Abu) */
+  --c-text-secondary: #6b7280; /* Teks Pendukung (Abu-abu) */
+  
+  --c-primary: #3b82f6;         /* Warna Aksen Biru */
+  --c-primary-hover: #2563eb;   /* Aksen Biru (Hover) */
+  
+  --c-danger: #ef4444;          /* Warna Bahaya/Hapus (Merah) */
+  --c-danger-bg-hover: #fef2f2; /* Latar Hapus (Hover) */
+
+  /* Bayangan (Shadow) */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.03), 0 10px 20px rgba(0,0,0,0.07);
+
+  /* Transisi */
+  --transition-ease: all 0.2s ease-in-out;
+}
+
+/* =================================
+   2. RESET & BODY
+   ================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px; /* Basis untuk 'rem' */
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--c-bg);
+  color: var(--c-text-primary);
+  line-height: 1.6;
+  padding: 2rem;
+}
+
+/* =================================
+   3. LAYOUT UTAMA & JUDUL
+   ================================= */
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: var(--c-surface);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+h1 {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 700;
+  color: var(--c-text-primary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 500;
+  color: var(--c-text-secondary);
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--c-border);
+  margin: 2.5rem 0;
+}
+
+/* =================================
+   4. AREA INPUT (FORM)
+   ================================= */
+.input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Jarak antar elemen input */
+}
+
+#input-tanggal,
+#input-catatan {
+  font-family: var(--font-family);
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  background-color: #fdfdfd;
+  transition: var(--transition-ease);
+}
+
+#input-tanggal:focus,
+#input-catatan:focus {
+  outline: none;
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+#input-catatan {
+  min-height: 140px;
+  resize: vertical;
+}
+
+#tombol-simpan {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background-color: var(--c-primary);
+  color: white;
+  transition: var(--transition-ease);
+}
+
+#tombol-simpan:hover {
+  background-color: var(--c-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2);
+}
+
+/* =================================
+   5. DAFTAR CATATAN
+   ================================= */
+#daftar-catatan {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.catatan-item {
+  background-color: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  word-wrap: break-word;
+  transition: var(--transition-ease);
+}
+
+.catatan-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: #d1d5db;
+}
+
+.catatan-item .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.catatan-item strong {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--c-text-primary);
+}
+
+.catatan-item p {
+  color: var(--c-text-secondary);
+  white-space: pre-wrap;
+  line-height: 1.7;
+}
+
+.catatan-item .tombol-hapus {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  color: var(--c-text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: var(--transition-ease);
+}
+
+.catatan-item .tombol-hapus:hover {
+  color: var(--c-danger);
+  background-color: var(--c-danger-bg-hover);
+}
+
+/* =================================
+   6. STYLE UNTUK FITUR AI
+   ================================= */
+.ai-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  border-top: 1px dashed var(--c-border);
+  padding-top: 1rem;
+}
+
+.tombol-ai {
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background-color: #fafafa;
+  color: var(--c-text-secondary);
+  transition: var(--transition-ease);
+}
+
+.tombol-ai:hover {
+  background-color: var(--c-bg);
+  color: var(--c-primary);
+  border-color: var(--c-primary);
+}
+
+.hasil-ai {
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: var(--c-bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--c-border);
+  white-space: pre-wrap; /* Jaga format teks dari AI */
+  display: none; /* Sembunyi secara default */
+}
